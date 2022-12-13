@@ -1,17 +1,17 @@
 const vinos = [
-    {id: 1, nombre: 'Trumpeter', cepa: 'malbec', precio: 1000},
-    {id: 2, nombre: 'Alma mora', cepa: 'syrah', precio: 800},
-    {id: 3, nombre: 'Luigi bosca', cepa: 'cabernet', precio: 1500},
-    {id: 4, nombre: 'Enemgio', cepa: 'malbec', precio: 1200},
-    {id: 5, nombre: 'Ruttini', cepa: 'cabernet', precio: 2000},
-    {id: 6, nombre: 'Catena Zapata', cepa: 'malbec', precio: 1750},
-    {id: 7, nombre: 'Zucardi piedra', cepa: 'malbec', precio: 2000},
-    {id: 8, nombre: 'Estiba', cepa: 'malbec', precio: 550},
-    {id: 9, nombre: 'Trapiche iscay', cepa: 'syrah', precio: 1550},
-    {id: 10, nombre: 'Finca las moras', cepa: 'syrah', precio: 1850},
-    {id: 11, nombre: 'Sophenia', cepa: 'syrah', precio: 450},
-    {id: 12, nombre: 'Bianchi', cepa: 'cabernet', precio: 1500},
-    {id: 13, nombre: 'Primus', cepa: 'cabernet', precio: 400},
+    {id: 1, nombre: 'Trumpeter', cepa: 'malbec', precio: 1000, oferta: true},
+    {id: 2, nombre: 'Alma mora', cepa: 'syrah', precio: 800, oferta: false},
+    {id: 3, nombre: 'Luigi bosca', cepa: 'cabernet', precio: 1500, oferta: true},
+    {id: 4, nombre: 'Enemgio', cepa: 'malbec', precio: 1200, oferta: false},
+    {id: 5, nombre: 'Ruttini', cepa: 'cabernet', precio: 2000, oferta: true},
+    {id: 6, nombre: 'Catena Zapata', cepa: 'malbec', precio: 1750, oferta: false},
+    {id: 7, nombre: 'Zucardi piedra', cepa: 'malbec', precio: 2000, oferta: true},
+    {id: 8, nombre: 'Estiba', cepa: 'malbec', precio: 550, oferta: false},
+    {id: 9, nombre: 'Trapiche iscay', cepa: 'syrah', precio: 1550, oferta: true},
+    {id: 10, nombre: 'Finca las moras', cepa: 'syrah', precio: 1850, oferta: false},
+    {id: 11, nombre: 'Sophenia', cepa: 'syrah', precio: 450, oferta: true},
+    {id: 12, nombre: 'Bianchi', cepa: 'cabernet', precio: 1500, oferta: false},
+    {id: 13, nombre: 'Primus', cepa: 'cabernet', precio: 400, oferta: true},
 ];
 
 
@@ -42,9 +42,22 @@ function evaluar_cepa(cepa){
                         resultado.push(vinos[i]);    
                     }
                 }               
-                if(resultado.length){
-                    alert(mensaje);
-                }else{
+                if (resultado.length) {
+                    if (confirm(mensaje + " \n ¿Le interesaría ver nuestras ofertas?" )) {
+                        let ofertas = vinos.filter(({oferta}) => oferta);
+                        //console.log(ofertas);
+                        let resultado_ofertas = "";
+                        ofertas.forEach(oferta => {
+                            resultado_ofertas += oferta.nombre + ": $" + oferta.precio + "\n";
+                            
+                        });
+
+
+                        let busqueda = prompt(resultado_ofertas + " \n o sino ingrese el nombre del vino que busca" ); 
+                        let vino_buscado = vinos.find(({vino}) => vino.nombre.toLowerCase() === busqueda);
+                        console.log(vino_buscado);
+                    }
+                } else {
                     alert("No encontramos ninguna seleccion para ese pedido-Por favor vuelva a comenzar");
                     comenzar();
                 }
@@ -93,7 +106,4 @@ filtrados.forEach((item) => {
     alert(mensaje)
     console.log(filtrados)
 
-});
-
-
-
+});*/
