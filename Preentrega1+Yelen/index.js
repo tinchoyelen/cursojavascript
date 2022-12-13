@@ -48,14 +48,20 @@ function evaluar_cepa(cepa){
                         //console.log(ofertas);
                         let resultado_ofertas = "";
                         ofertas.forEach(oferta => {
-                            resultado_ofertas += oferta.nombre + ": $" + oferta.precio + "\n";
+                            resultado_ofertas += oferta.nombre + " " + oferta.cepa + ": $" + oferta.precio + "\n";
                             
                         });
 
 
                         let busqueda = prompt(resultado_ofertas + " \n o sino ingrese el nombre del vino que busca" ); 
-                        let vino_buscado = vinos.find(({vino}) => vino.nombre.toLowerCase() === busqueda);
-                        console.log(vino_buscado);
+                        let vino_buscado = vinos.find(({nombre}) => nombre.toLowerCase() === busqueda.toLowerCase());
+                        //console.log(vino_buscado);
+
+                        if (vino_buscado){
+                            alert(`Resultado de la busqueda: \n ${vino_buscado.nombre} ${vino_buscado.cepa}: $${vino_buscado.precio} `)
+                        } else {
+                            alert("Ese vino no esta disponible")
+                        }
                     }
                 } else {
                     alert("No encontramos ninguna seleccion para ese pedido-Por favor vuelva a comenzar");
@@ -85,25 +91,3 @@ function evaluar_precio(precio){
 
 
 
-/*let encontrado = vinos.find(item => vinos.nombre === "trumpeter");
-let mensaje =
-id: ${encontrado.id}
-nombre: ${encontrado.nombre} //xq esta en gris
-Precio: $${encontrado.precio}
-;
-console.log(encontrado); //puede ser con un alert tmb?
-
-/////////////////////////////////////////////////7
-
-let filtrados = vinos.filter ((item) => vinos.precio > precio );
-filtrados.forEach((item) => {
-    let mensaje = `
-    id: ${item.id}
-    nombre: ${item.nombre}
-    precio: $${item.precio}
-    `;
-
-    alert(mensaje)
-    console.log(filtrados)
-
-});*/
