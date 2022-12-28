@@ -1,21 +1,149 @@
-const vinos = [
-    {id: 1, nombre: 'Trumpeter', cepa: 'malbec', precio: 1000, oferta: true},
-    {id: 2, nombre: 'Alma mora', cepa: 'syrah', precio: 800, oferta: false},
-    {id: 3, nombre: 'Luigi bosca', cepa: 'cabernet', precio: 1500, oferta: true},
-    {id: 4, nombre: 'Enemgio', cepa: 'malbec', precio: 1200, oferta: false},
-    {id: 5, nombre: 'Ruttini', cepa: 'cabernet', precio: 2000, oferta: true},
-    {id: 6, nombre: 'Catena Zapata', cepa: 'malbec', precio: 1750, oferta: false},
-    {id: 7, nombre: 'Zucardi piedra', cepa: 'malbec', precio: 2000, oferta: true},
-    {id: 8, nombre: 'Estiba', cepa: 'malbec', precio: 550, oferta: false},
-    {id: 9, nombre: 'Trapiche iscay', cepa: 'syrah', precio: 1550, oferta: true},
-    {id: 10, nombre: 'Finca las moras', cepa: 'syrah', precio: 1850, oferta: false},
-    {id: 11, nombre: 'Sophenia', cepa: 'syrah', precio: 450, oferta: true},
-    {id: 12, nombre: 'Bianchi', cepa: 'cabernet', precio: 1500, oferta: false},
-    {id: 13, nombre: 'Primus', cepa: 'cabernet', precio: 400, oferta: true},
+const stockVinos = [
+    {id: 1, nombre: 'Trumpeter', cepa: 'malbec', precio: 1000, img: "trumpetermalbec.png" },
+    {id: 2, nombre: 'Alma mora', cepa: 'syrah', precio: 800, img: "almamorasyrah.png"},
+    {id: 3, nombre: 'Luigi bosca', cepa: 'cabernet', precio: 1500, img: "luigiboscacabernet.png"},
+    {id: 4, nombre: 'Enemgio', cepa: 'malbec', precio: 1200, img: "enemigomalbec.png"},
+    {id: 5, nombre: 'Ruttini', cepa: 'cabernet', precio: 2000, img: "rutinicabernet.png"},
+    {id: 6, nombre: 'Catena Zapata', cepa: 'malbec', precio: 1750, img: "catenazapatamalbec.png"},
+    {id: 7, nombre: 'Zucardi piedra', cepa: 'malbec', precio: 2000, img: "zuccardipiedramalbec.png"},
+    {id: 8, nombre: 'Estiba', cepa: 'malbec', precio: 550, img: "estibiamalbec.png"},
+    {id: 9, nombre: 'Trapiche iscay', cepa: 'syrah', precio: 1550, img: "trapicheiscaysyrah.png"},
+    {id: 10, nombre: 'Finca las moras', cepa: 'syrah', precio: 1850, img: "almamorasyrah.png"},
+    {id: 11, nombre: 'Sophenia', cepa: 'syrah', precio: 450, img: "almamorasyrah.png"},
+    {id: 12, nombre: 'Bianchi', cepa: 'cabernet', precio: 1500, img: "almamorasyrah.png"},
+    {id: 13, nombre: 'Primus', cepa: 'cabernet', precio: 400, img: "almamorasyrah.png"},
 ];
 
+let carrito = localStorage.getItem("storageCarrito") ? JSON.parse(localStorage.getItem("storageCarrito")) : []
+let iconoCarrito = document.getElementById("carritoContenedor");
+let listaCarrito = document.getElementById("listaCarrito")
+let totalCarrito = 0;
+iconoCarrito.innerHTML=carrito.length;
+
+const contenedor = document.querySelector('#contenedor')
+stockVinos.forEach((vinos) => {
+    //console.log(vinos);
+    const {id, nombre, cepa, precio, img} = vinos
+    //console.log(nombre);
+    contenedor.innerHTML += `
+    <div class="col">
+    <div class="card" style="width: 18rem;">
+  <img src="imagenes/${img}" class="card-img-top mt-2" alt="imagen de vinos">
+  <div class="card-body">
+    <h5 class="card-title">${nombre}</h5>
+    <p class="card-text">Precio: $${precio}</p>
+    <p class="card-text">Cepa: ${cepa}</p>
+    
+    <button data-id="${id}" class="btn btn-primary agregar">Agregar al carrito</button>
+  </div>
+</div>
+</div>
+    `
+});
+
+let botones = document.querySelectorAll(".agregar");
+
+//console.log(botones);
+botones.forEach((boton) => {
+    boton.addEventListener("click",() => {
+        const item = stockVinos.find((vinos) => vinos.id === parseInt(boton.dataset.id))
+        //console.log(item)
+        //console.log(boton.dataset.id)
+        carrito.push(item);
+        console.log(carrito);
+
+        iconoCarrito.innerHTML= carrito.length;
+        localStorage.setItem("storageCarrito", JSON.stringify(carrito))
+    })
+});
+
+iconoCarrito.addEventListener("click", () => {
+    carrito.forEach((vino) => {
+        //console.log(vinos);
+        const { nombre, precio, img, id} = vino
+        //console.log(nombre);
+        listaCarrito.innerHTML += `
+        <li>
+      <img src="imagenes/${img}" alt="imagen de vinos">
+        <p> ${nombre} Precio: $${precio}</p>
+        <a class="eliminar" data-id="${id}"> x </a>
+        </li> 
+        `
+        totalCarrito += parseInt(precio);
+    })
+    listaCarrito.innerHTML += `Total: $${totalCarrito}`
+})
+
+let botonesEliminar= document.querySelectorAll(".eliminar")
+botonesEliminar.forEach((boton) => {
+    boton.addEventListener("click", () => {
+        
+    })
+})
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 let mensaje = "Estos son los vinos disponibles para su seleccion:\n";
 let resultado = [];
 let limite_precio;
@@ -84,7 +212,7 @@ function evaluar_precio(precio){
     }
    
 }
-
+*/
 
 
 
