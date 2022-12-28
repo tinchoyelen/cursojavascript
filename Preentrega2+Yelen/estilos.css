@@ -1,3 +1,57 @@
 .img-carrito{
     max-width: 30px;
 }
+
+.posicionVinos{
+    margin-top: 105px;
+}
+
+
+.footer {
+    background-color: rgb(3, 3, 3);
+    padding: 25px;
+  }
+
+  footer #redes {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  footer #redes .redesIcono {
+    width: 50px;
+    height: 50px;
+  }
+
+  footer #info {
+    padding-top: 28px;
+    text-align: center;
+    /*probar con este elimino el menu de abajo*/
+  }
+
+  @media (min-width: 768px) {
+    footer #info {
+      padding-top: 0px;
+      text-align: left;
+    }
+  }
+
+  @media (max-width: 768px) {
+    footer #info {
+      display: none;
+    }
+  }
+
+  footer #info div {
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: white;
+  }
+
+  footer #info div a {
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  footer #info div a:visited, footer #info div a:hover {
+    color: blue;
+  }
