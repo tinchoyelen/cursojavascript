@@ -50,7 +50,7 @@ botones.forEach((boton) => {
         //console.log(item)
         //console.log(boton.dataset.id)
         carrito.push(item);
-        console.log(carrito);
+        //console.log(carrito);
 
         iconoCarrito.innerHTML= carrito.length;
         localStorage.setItem("storageCarrito", JSON.stringify(carrito))
@@ -58,28 +58,43 @@ botones.forEach((boton) => {
 });
 
 iconoCarrito.addEventListener("click", () => {
+    listaCarrito.innerHTML="";
     carrito.forEach((vino) => {
         //console.log(vinos);
         const { nombre, precio, img, id} = vino
         //console.log(nombre);
         listaCarrito.innerHTML += `
         <li>
-      <img src="imagenes/${img}" alt="imagen de vinos">
+      <img class="img-carrito" src="imagenes/${img}" alt="imagen de vinos">
         <p> ${nombre} Precio: $${precio}</p>
-        <a class="eliminar" data-id="${id}"> x </a>
+        <a class="eliminar" data-id="${id}" data-precio="${precio}"> x </a>
         </li> 
         `
         totalCarrito += parseInt(precio);
     })
-    listaCarrito.innerHTML += `Total: $${totalCarrito}`
+    listaCarrito.innerHTML += `<li id="totalLista">Total: $${totalCarrito}</li>`;
+    let botonesEliminar= document.querySelectorAll(".eliminar");
+    botonesEliminar.forEach((boton) => {
+        boton.addEventListener("click", () => {
+            const item = carrito.find((vinos) => vinos.id === parseInt(boton.dataset.id));
+            const index= carrito.indexOf(item);
+            if(index > -1){
+                carrito.splice(index, 1);
+            }
+            totalCarrito -= parseInt(boton.dataset.precio)
+            document.getElementById("totalLista").innerHTML = `Total: $${totalCarrito}`;
+            localStorage.removeItem("storageCarrito");
+            localStorage.setItem("storageCarrito", JSON.stringify(carrito));
+            boton.parentElement.remove();
+            iconoCarrito.innerHTML=carrito.length;
+
+        })
+    })
+    
+
 })
 
-let botonesEliminar= document.querySelectorAll(".eliminar")
-botonesEliminar.forEach((boton) => {
-    boton.addEventListener("click", () => {
-        
-    })
-})
+
 
 
 
