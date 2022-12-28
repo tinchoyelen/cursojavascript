@@ -6,6 +6,21 @@
     margin-top: 105px;
 }
 
+.navbar-nav{
+  text-align: center;
+}
+
+.text-white{
+  text-decoration: none;
+}
+
+.nav-link{
+transform: 0.2s;
+}
+
+nav-link:hover{
+  transform: scale(1.5);
+}
 
 .footer {
     background-color: rgb(3, 3, 3);
