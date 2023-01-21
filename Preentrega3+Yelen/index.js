@@ -1,19 +1,8 @@
-const stockVinos = [
-    {id: 1, nombre: 'Trumpeter', cepa: 'malbec', precio: 1000, img: "trumpetermalbec.png" },
-    {id: 2, nombre: 'Alma mora', cepa: 'syrah', precio: 800, img: "catenazapatamalbec.png"},
-    {id: 3, nombre: 'Luigi bosca', cepa: 'cabernet', precio: 1500, img: "luigiboscacabernet.png"},
-    {id: 4, nombre: 'Enemgio', cepa: 'malbec', precio: 1200, img: "enemigomalbec.png"},
-    {id: 5, nombre: 'Ruttini', cepa: 'cabernet', precio: 2000, img: "rutinicabernet.png"},
-    {id: 6, nombre: 'Catena Zapata', cepa: 'malbec', precio: 1750, img: "catenazapatamalbec.png"},
-    {id: 7, nombre: 'Zucardi piedra', cepa: 'malbec', precio: 2000, img: "zuccardipiedramalbec.png"},
-    {id: 8, nombre: 'Estiba', cepa: 'malbec', precio: 550, img: "catenazapatamalbec.png"},
-    {id: 9, nombre: 'Trapiche iscay', cepa: 'syrah', precio: 1550, img: "trapicheiscaysyrah.png"},
-    {id: 10, nombre: 'Finca las moras', cepa: 'syrah', precio: 1850, img: "fincalasmorassyrah.png"},
-    {id: 11, nombre: 'Sophenia', cepa: 'syrah', precio: 450, img: "sopheniasyrah.png"},
-    {id: 12, nombre: 'Bianchi', cepa: 'cabernet', precio: 1500, img: "bianchicabernet.png"},
-    {id: 13, nombre: 'Primus', cepa: 'cabernet', precio: 400, img: "catenazapatamalbec.png"},
-];
-
+//const data = fetch 
+fetch('data.json')
+.then(response => response.json())
+.then(
+    (data) => {
 let carrito = localStorage.getItem("storageCarrito") ? JSON.parse(localStorage.getItem("storageCarrito")) : []
 let iconoCarrito = document.getElementById("carritoContenedor");
 let listaCarrito = document.getElementById("listaCarrito")
@@ -21,7 +10,7 @@ let totalCarrito = 0;
 iconoCarrito.innerHTML=carrito.length;
 
 const contenedor = document.querySelector('#contenedor')
-stockVinos.forEach((vinos) => {
+data.forEach((vinos) => {
     //console.log(vinos);
     const {id, nombre, cepa, precio, img} = vinos
     //console.log(nombre);
@@ -46,7 +35,7 @@ let botones = document.querySelectorAll(".agregar");
 //console.log(botones);
 botones.forEach((boton) => {
     boton.addEventListener("click",() => {
-        const item = stockVinos.find((vinos) => vinos.id === parseInt(boton.dataset.id))
+        const item = data.find((vinos) => vinos.id === parseInt(boton.dataset.id))
         //console.log(item)
         //console.log(boton.dataset.id)
         carrito.push(item);
@@ -158,6 +147,14 @@ procesarCompra.addEventListener('click', () => {
 
 
 })
+
+    }
+    
+    
+);
+
+
+
 
 
 
