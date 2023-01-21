@@ -54,7 +54,30 @@ botones.forEach((boton) => {
 
         iconoCarrito.innerHTML= carrito.length;
         localStorage.setItem("storageCarrito", JSON.stringify(carrito))
-    })
+        
+
+        let timerInterval
+            Swal.fire({
+                title: 'Producto agregado al carrito',
+                timer: 500,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                    b.textContent = Swal.getTimerLeft()
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+                }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    console.log('I was closed by the timer')
+                }
+                })
+                    })
 });
 
 iconoCarrito.addEventListener("click", () => {
@@ -93,6 +116,51 @@ iconoCarrito.addEventListener("click", () => {
     
 
 })
+
+
+let contacto = document.querySelector('#contacto')
+contacto.addEventListener('click', () => {
+    const { value: email } =  Swal.fire({
+  title: 'Escribe su Email y nos contactaremos con vos',
+  input: 'email',
+  inputPlaceholder: 'Enter your email address'
+})
+
+if (email) {
+  Swal.fire(`Entered email: ${email}`)
+}
+})
+
+
+const procesarCompra = document.querySelector('#procesarCompra')
+procesarCompra.addEventListener('click', () => {
+    if(carrito.length === 0){
+        swal.fire({
+            title: "¡Tu carrito esta vacio!",
+            text: "Selecciona un vino para seguir con la compra",
+            icon: "error",
+            confirmButtonText: "Aceptar",
+        })
+
+    } else{ 
+        const { value: email } = Swal.fire({
+            title: 'Gracias por su compra',
+            input: 'email',
+            inputLabel: 'Indique su email para finalizar la compra',
+            inputPlaceholder: 'Enter your email address',
+        })
+  
+       if (email) {
+             Swal.fire(`Nos contactaremos a este correo a la brevedad: ${email}`)
+        }
+        
+    }
+
+
+})
+
+
+
 
 
 
