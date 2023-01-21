@@ -133,13 +133,9 @@ procesarCompra.addEventListener('click', () => {
 
     } else{ 
         const { value: email } = Swal.fire({
-            title: 'Gracias por su compra',
-            
+            title: 'Gracias por su compra',   
         })
   
-       if (email) {
-             Swal.fire(`Nos contactaremos a este correo a la brevedad: ${email}`)
-        }
         
     }
 
