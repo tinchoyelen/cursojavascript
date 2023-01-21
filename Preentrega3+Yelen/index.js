@@ -1,5 +1,5 @@
-//const data = fetch 
-fetch('data.json')
+const contenedor = document.querySelector('#contenedor')
+ fetch('data.json')
 .then(response => response.json())
 .then(
     (data) => {
@@ -9,7 +9,7 @@ let listaCarrito = document.getElementById("listaCarrito")
 let totalCarrito = 0;
 iconoCarrito.innerHTML=carrito.length;
 
-const contenedor = document.querySelector('#contenedor')
+
 data.forEach((vinos) => {
     //console.log(vinos);
     const {id, nombre, cepa, precio, img} = vinos
@@ -134,9 +134,7 @@ procesarCompra.addEventListener('click', () => {
     } else{ 
         const { value: email } = Swal.fire({
             title: 'Gracias por su compra',
-            input: 'email',
-            inputLabel: 'Indique su email para finalizar la compra',
-            inputPlaceholder: 'Enter your email address',
+            
         })
   
        if (email) {
@@ -150,8 +148,11 @@ procesarCompra.addEventListener('click', () => {
 
     }
     
-    
-);
+  
+).catch((error) => {
+    console.log(error)
+    contenedor.innerHTML="<h2 class='error'> Lo sentimos algo salio mal, intente nuevamente mas tarde. </h2>"
+})
 
 
 

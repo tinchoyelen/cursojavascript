@@ -70,3 +70,9 @@ nav-link:hover{
   footer #info div a:visited, footer #info div a:hover {
     color: blue;
   }
+
+  .error {
+    margin: 40px 0 500px 0; 
+    text-align: center;
+    
+  }
